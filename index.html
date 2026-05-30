@@ -114,16 +114,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .res-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem}
 @media(max-width:700px){.res-grid{grid-template-columns:repeat(2,1fr)}}
 
-.rc{border-radius:12px;padding:1.1rem;border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color .25s}
+.rc{border-radius:12px;padding:1.1rem;border:1px solid var(--border);position:relative;overflow:hidden;transition:border-width .2s,border-color .2s}
 .rc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
 .rc.c1{background:linear-gradient(155deg,var(--s1),rgba(52,209,122,.05))}.rc.c1::before{background:var(--c1)}.rc.c1 .rmain{color:var(--c1)}
 .rc.c2{background:linear-gradient(155deg,var(--s1),rgba(79,142,247,.05))}.rc.c2::before{background:var(--c2)}.rc.c2 .rmain{color:var(--c2)}
 .rc.c3{background:linear-gradient(155deg,var(--s1),rgba(245,166,35,.05))}.rc.c3::before{background:var(--c3)}.rc.c3 .rmain{color:var(--c3)}
 .rc.c4{background:linear-gradient(155deg,var(--s1),rgba(167,139,250,.05))}.rc.c4::before{background:var(--c4)}.rc.c4 .rmain{color:var(--c4)}
-.rname{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.35rem}
+.rc.c5{background:linear-gradient(155deg,var(--s1),rgba(244,114,182,.05))}.rc.c5::before{background:var(--c5)}.rc.c5 .rmain{color:var(--c5)}
+.rc.c1.rank1,.rc.c1.rank2,.rc.c1.rank3{border:2px solid var(--c1)}
+.rc.c2.rank1,.rc.c2.rank2,.rc.c2.rank3{border:2px solid var(--c2)}
+.rc.c3.rank1,.rc.c3.rank2,.rc.c3.rank3{border:2px solid var(--c3)}
+.rc.c4.rank1,.rc.c4.rank2,.rc.c4.rank3{border:2px solid var(--c4)}
+.rc.c5.rank1,.rc.c5.rank2,.rc.c5.rank3{border:2px solid var(--c5)}
+.rname{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--text);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.35rem}
 .rmain-wrap{display:flex;flex-direction:column;justify-content:flex-end;margin-bottom:.2rem}
 .rmain{font-family:var(--mono);font-size:clamp(13px,1.5vw,20px);font-weight:500;letter-spacing:-.02em;line-height:1.1;white-space:nowrap}
-.rsub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:.2rem}
+.rsub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:.2rem;min-height:32px}
 .rsub2{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:.55rem;display:flex;gap:8px}
 .rsub2 .tag{background:var(--s3);border-radius:4px;padding:1px 6px;font-size:9px}
 .rrow{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:10px;margin-bottom:3px;gap:4px}
@@ -132,7 +138,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .rdiv{border-top:1px solid var(--border);margin:.4rem 0}
 .rbadge{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:.4rem}
 .pos{color:var(--c1)}.neg{color:var(--danger)}
-.rc.c5{background:linear-gradient(155deg,var(--s1),rgba(244,114,182,.05))}.rc.c5::before{background:var(--c5)}.rc.c5 .rmain{color:var(--c5)}
+.rank-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:9px;font-weight:500;padding:2px 8px;border-radius:20px;margin-bottom:.35rem;letter-spacing:.03em;min-height:20px}
+.rank-badge.r1{background:rgba(245,197,24,0.15);color:#c9a80a}
+.rank-badge.r2{background:rgba(176,183,195,0.15);color:#8892b0}
+.rank-badge.r3{background:rgba(205,127,50,0.15);color:#a0622a}
+.rank-badge.r4,.rank-badge.r5{background:rgba(255,255,255,0.05);color:var(--dim)}
 
 /* CHART BOX */
 .chbox{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:1.25rem}
@@ -394,6 +404,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <div class="res-grid">
     <div class="rc c1">
       <div class="rname">CDB</div>
+      <div id="r-cdb-rank"></div>
       <div class="rmain-wrap"><div class="rmain" id="r-cdb-v">—</div></div>
       <div class="rsub" id="r-cdb-aa">—</div>
       <div class="rsub2" id="r-cdb-sub2"><span class="tag" id="r-cdb-ret">—</span><span class="tag" id="r-cdb-mult">—</span></div>
@@ -407,6 +418,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
     <div class="rc c2">
       <div class="rname">Tesouro Reserva</div>
+      <div id="r-trs-rank"></div>
       <div class="rmain-wrap"><div class="rmain" id="r-trs-v">—</div></div>
       <div class="rsub" id="r-trs-aa">—</div>
       <div class="rsub2" id="r-trs-sub2"><span class="tag" id="r-trs-ret">—</span><span class="tag" id="r-trs-mult">—</span></div>
@@ -420,6 +432,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
     <div class="rc c3">
       <div class="rname">Fundo Come-cotas</div>
+      <div id="r-fnd-rank"></div>
       <div class="rmain-wrap"><div class="rmain" id="r-fnd-v">—</div></div>
       <div class="rsub" id="r-fnd-aa">—</div>
       <div class="rsub2" id="r-fnd-sub2"><span class="tag" id="r-fnd-ret">—</span><span class="tag" id="r-fnd-mult">—</span></div>
@@ -433,6 +446,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
     <div class="rc c4">
       <div class="rname">ETF</div>
+      <div id="r-etf-rank"></div>
       <div class="rmain-wrap"><div class="rmain" id="r-etf-v">—</div></div>
       <div class="rsub" id="r-etf-aa">—</div>
       <div class="rsub2" id="r-etf-sub2"><span class="tag" id="r-etf-ret">—</span><span class="tag" id="r-etf-mult">—</span></div>
@@ -446,6 +460,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
     <div class="rc c5">
       <div class="rname">Previdência</div>
+      <div id="r-prv-rank"></div>
       <div class="rmain-wrap"><div class="rmain" id="r-prv-v">—</div></div>
       <div class="rsub" id="r-prv-aa">—</div>
       <div class="rsub2" id="r-prv-sub2"><span class="tag" id="r-prv-ret">—</span><span class="tag" id="r-prv-mult">—</span></div>
@@ -727,6 +742,32 @@ function update() {
     'var(--c5a);color:var(--c5)'
   ];
   const best = Math.max(...finals.map(f => f.liq));
+
+  // Ranking: sort by liq descending
+  const ranked = [...finals.map((f,i) => ({f, i}))]
+    .sort((a,b) => b.f.liq - a.f.liq)
+    .map((item, pos) => ({ ...item, pos: pos+1 }));
+  const rankOf = {}; // pfx -> rank position
+  ranked.forEach(({i, pos}) => { rankOf[pfx[i]] = pos; });
+
+  const rankLabels = ['', '🥇 #1', '🥈 #2', '🥉 #3', '#4', '#5'];
+  const rankClass  = ['', 'r1',    'r2',    'r3',    'r4', 'r5'];
+  const cardClass  = ['', 'rank1', 'rank2', 'rank3', '',   ''];
+
+  // Apply rank border to cards
+  ['cdb','trs','fnd','etf','prv'].forEach(p => {
+    const card = R('r-'+p+'-v')?.closest('.rc');
+    if (card) {
+      card.classList.remove('rank1','rank2','rank3');
+      const pos = rankOf[p];
+      if (cardClass[pos]) card.classList.add(cardClass[pos]);
+    }
+    const rankEl = R('r-'+p+'-rank');
+    if (rankEl) {
+      const pos = rankOf[p];
+      rankEl.innerHTML = `<span class="rank-badge ${rankClass[pos]}">${rankLabels[pos]}</span>`;
+    }
+  });
 
   finals.forEach((f, i) => {
     const p = pfx[i];
